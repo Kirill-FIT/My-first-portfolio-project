@@ -20,7 +20,7 @@ class ProductPage(BasePage):
         # записываем в переменную in_message_name текст из элемента #messages
         in_message_name = self.browser.find_element(*ProductPageLocators.SUCCESS_MESAGE).text
         # с помощью assert проверяем, что текст переменной product_name СОДЕРЖИТСЯ в тексте переменной с сообщением о добавлении продукта
-        assert product_name in in_message_name, f'"{product_name}" is not "{in_message_name}"'
+        assert product_name == in_message_name, f'"{product_name}" is not "{in_message_name}"'
     def should_be_prise_equal(self):
         assert self.is_element_present(*ProductPageLocators.BASKET_TOTAL), ('Total cost message is not ptesent')
         product_prise = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
