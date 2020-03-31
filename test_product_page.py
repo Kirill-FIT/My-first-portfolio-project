@@ -12,7 +12,7 @@ def browser():
 
 veb_sites = [
     ("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"),
-    ("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1"),
+    """("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1"),
     ("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer2"),
     ("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer3"),
     ("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer4"),
@@ -20,12 +20,12 @@ veb_sites = [
     ("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer6"),
     pytest.param("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7", marks=pytest.mark.xfail(reason="fixing this bug right now")),
     ("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8"),
-    ("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9")
+    ("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9")"""
 ]
 
 @pytest.mark.parametrize('page', veb_sites)
 class TestPage(object):
-    def test_guest_can_add_product_to_basket(self, browser, page): # этот тест запустится 10 раз
+    def test_guest_can_add_product_to_basket(self, browser, page):
         link = f"{page}"
         page = ProductPage(browser, link)
         page.open()
@@ -35,3 +35,29 @@ class TestPage(object):
         page.should_be_quiz()
         page.should_be_name_equal()
         page.should_be_prise_equal()
+        
+    @pytest.mark.xfail(reason="fixing this bug right now")
+    def test_guest_cant_see_success_message_after_adding_product_to_basket(self, browser, page):
+        link = f"{page}"
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_be_button_add_product_to_basket()
+        page.push_button_add_product_to_basket()
+        page.should_be_quiz()
+        page.should_not_be_success_message()
+        
+    def test_guest_cant_see_success_message(self, browser, page):
+        link = f"{page}"
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
+        
+    @pytest.mark.xfail(reason="fixing this bug right now")
+    def test_message_disappeared_after_adding_product_to_basket(self, browser, page):
+        link = f"{page}"
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_be_button_add_product_to_basket()
+        page.push_button_add_product_to_basket()
+        page.should_be_quiz()
+        page.should_be_success_message_is_disappeared()
