@@ -14,8 +14,12 @@ class BasePage():
         self.url = url
         # self.browser.implicitly_wait(timeout) # закомментить необходимо, чтобы корректно отрабатывали индивидуальные методы WebDriverWait -> until и WebDriverWait -> until_not (см. ниже). т.е. тем самым отключить неявные ожидания
     
+    def go_to_basket(self):
+        link = self.browser.find_element(*BasePageLocators.BUTTON_BASKET)
+        link.click()
+    
     def go_to_login_page(self):
-        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK_INVALID)
+        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
     
     def is_element_present(self, how, what):
