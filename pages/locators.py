@@ -5,7 +5,10 @@ class BasePageLocators():
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
     BUTTON_BASKET = (By.CSS_SELECTOR, ".btn-group")
     USER_ICON = (By.CSS_SELECTOR, ".icon-user")
-    
+
+class MainPageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+
 class LoginPageLocators():
     LOGIN_SUBMIT = (By.CSS_SELECTOR, "#login_form")
     REGISTRATION_SUBMIT = (By.CSS_SELECTOR, "#register_form")
